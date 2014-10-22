@@ -46,7 +46,7 @@ namespace MMACadmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MACID,AccSystem,AccEnv,AccGroup,AccServer,AccDB,AccJust,isElevated,ReqSetID")] MACRequest mACRequest)
+        public ActionResult Create([Bind(Include = "AccSystem,AccEnv,AccGroup,AccServer,AccDB,AccJust,isElevated,ReqSetID")] MACRequest mACRequest)
         {
             if (ModelState.IsValid)
             {

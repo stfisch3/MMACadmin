@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin Options</h2>
+
+<p>
+    Set up and view admin only items
+</p>
+
+@Html.ActionLink("Roles","Index","Roles",null,null)
+@Html.ActionLink("Environments", "Index", "Envs", null, null)
+@Html.ActionLink("Departments", "Index", "Depts", null, null)
