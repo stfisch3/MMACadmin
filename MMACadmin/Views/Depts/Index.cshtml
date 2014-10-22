@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MMACadmin.Models.Dept>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Departments</h2>
+<p>
+    Here is the list of available Depts.
+    This screen is available to application admins only.
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Dept. Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeptName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DeptID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DeptID })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

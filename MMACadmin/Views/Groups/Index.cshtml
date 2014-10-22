@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MMACadmin.Models.Group>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Groups</h2>
+<p></p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th> Group  </th>
+        <th> Dept. </th>
+        <th> Date Created </th>
+        <th> Owner  </th>
+        <th> Backup Owner  </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.GroupName, "Details", new { id=item.GroupID})
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackUpOwner)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GroupID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GroupID })
+        </td>
+    </tr>
+}
+
+</table>

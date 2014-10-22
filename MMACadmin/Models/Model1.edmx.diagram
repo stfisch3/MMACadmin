@@ -18,6 +18,8 @@
         <AssociationConnector Association="Model1.GroupReqSet" />
         <EntityTypeShape EntityType="Model1.MACRequest" Width="1.5" PointX="1.5" PointY="5.75" />
         <AssociationConnector Association="Model1.ReqSetMACRequest" />
+        <EntityTypeShape EntityType="Model1.Dept" Width="1.5" PointX="8.25" PointY="1.625" />
+        <AssociationConnector Association="Model1.DeptGroup" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

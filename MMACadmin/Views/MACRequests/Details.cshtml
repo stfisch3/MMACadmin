@@ -1,0 +1,82 @@
+﻿@model MMACadmin.Models.MACRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MACRequest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AccSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccEnv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccEnv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccServer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccServer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccDB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccDB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccJust)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccJust)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isElevated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isElevated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReqSetID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReqSetID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MACID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

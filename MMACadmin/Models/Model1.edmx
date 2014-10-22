@@ -13,6 +13,7 @@
     <EntitySet Name="Roles" EntityType="Model1.Store.Roles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Envs" EntityType="Model1.Store.Envs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MACRequests" EntityType="Model1.Store.MACRequests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Depts" EntityType="Model1.Store.Depts" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ProjectProjectRelease" Association="Model1.Store.ProjectProjectRelease">
       <End Role="Project" EntitySet="Projects" />
       <End Role="ProjectRelease" EntitySet="ProjectReleases" />
@@ -37,6 +38,10 @@
       <End Role="ReqSet" EntitySet="ReqSets" />
       <End Role="MACRequest" EntitySet="MACRequests" />
     </AssociationSet>
+    <AssociationSet Name="DeptGroup" Association="Model1.Store.DeptGroup">
+      <End Role="Dept" EntitySet="Depts" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Groups">
     <Key>
@@ -47,6 +52,8 @@
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BackUpOwner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeptID" Type="int" Nullable="false" />
+    <Property Name="Dept_DeptID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Projects">
     <Key>
@@ -115,6 +122,13 @@
     <Property Name="isElevated" Type="bit" Nullable="false" />
     <Property Name="ReqSetID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ReqSet_ReqSetID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Depts">
+    <Key>
+      <PropertyRef Name="DeptID" />
+    </Key>
+    <Property Name="DeptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="ProjectProjectRelease">
     <End Role="Project" Type="Model1.Store.Projects" Multiplicity="1" />
@@ -188,6 +202,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="DeptGroup">
+    <End Role="Dept" Type="Model1.Store.Depts" Multiplicity="1" />
+    <End Role="Group" Type="Model1.Store.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="DeptID" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="Dept_DeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -224,6 +250,11 @@
             <End Role="ReqSet" EntitySet="ReqSets" />
             <End Role="MACRequest" EntitySet="MACRequests" />
           </AssociationSet>
+          <EntitySet Name="Depts" EntityType="Model1.Dept" />
+          <AssociationSet Name="DeptGroup" Association="Model1.DeptGroup">
+            <End Role="Dept" EntitySet="Depts" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Group">
           <Key>
@@ -235,6 +266,8 @@
           <Property Name="Owner" Type="String" Nullable="false" />
           <Property Name="BackUpOwner" Type="String" Nullable="false" />
           <NavigationProperty Name="ReqSets" Relationship="Model1.GroupReqSet" FromRole="Group" ToRole="ReqSet" />
+          <Property Name="DeptID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dept" Relationship="Model1.DeptGroup" FromRole="Group" ToRole="Dept" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -333,6 +366,18 @@
           <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="1" />
           <End Type="Model1.MACRequest" Role="MACRequest" Multiplicity="*" />
         </Association>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="DeptID" />
+          </Key>
+          <Property Name="DeptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Model1.DeptGroup" FromRole="Dept" ToRole="Group" />
+        </EntityType>
+        <Association Name="DeptGroup">
+          <End Type="Model1.Dept" Role="Dept" Multiplicity="1" />
+          <End Type="Model1.Group" Role="Group" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -347,6 +392,7 @@
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="Owner" ColumnName="Owner" />
           <ScalarProperty Name="BackUpOwner" ColumnName="BackUpOwner" />
+          <ScalarProperty Name="DeptID" ColumnName="DeptID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -418,6 +464,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Depts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Dept)">
+        <MappingFragment StoreEntitySet="Depts">
+          <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="ProjectProjectRelease" TypeName="Model1.ProjectProjectRelease" StoreEntitySet="ProjectReleases">
       <EndProperty Name="Project">
         <ScalarProperty Name="ProjectID" ColumnName="Project_ProjectID" />
@@ -466,6 +520,14 @@
       </EndProperty>
       <EndProperty Name="MACRequest">
         <ScalarProperty Name="MACID" ColumnName="MACID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DeptGroup" TypeName="Model1.DeptGroup" StoreEntitySet="Groups">
+      <EndProperty Name="Dept">
+        <ScalarProperty Name="DeptID" ColumnName="Dept_DeptID" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="GroupID" ColumnName="GroupID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -12,21 +12,16 @@ namespace MMACadmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Group
+    public partial class Dept
     {
-        public Group()
+        public Dept()
         {
-            this.ReqSets = new HashSet<ReqSet>();
+            this.Groups = new HashSet<Group>();
         }
     
-        public int GroupID { get; set; }
-        public string GroupName { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public string Owner { get; set; }
-        public string BackUpOwner { get; set; }
         public int DeptID { get; set; }
+        public string DeptName { get; set; }
     
-        public virtual ICollection<ReqSet> ReqSets { get; set; }
-        public virtual Dept Dept { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

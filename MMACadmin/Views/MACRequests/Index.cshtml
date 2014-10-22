@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MMACadmin.Models.MACRequest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccSystem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccEnv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccServer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccDB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccJust)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isElevated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReqSetID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccSystem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccEnv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccServer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccDB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccJust)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isElevated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReqSetID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MACID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MACID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MACID })
+        </td>
+    </tr>
+}
+
+</table>

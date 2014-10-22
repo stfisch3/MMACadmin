@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/21/2014 20:23:18
+-- Date Created: 10/21/2014 22:04:46
 -- Generated from EDMX file: c:\users\mc\documents\visual studio 2013\Projects\MMACadmin\MMACadmin\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -17,6 +17,24 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ProjectProjectRelease]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProjectReleases] DROP CONSTRAINT [FK_ProjectProjectRelease];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RoleReqSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReqSets] DROP CONSTRAINT [FK_RoleReqSet];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EnvReqSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReqSets] DROP CONSTRAINT [FK_EnvReqSet];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectReleaseReqSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReqSets] DROP CONSTRAINT [FK_ProjectReleaseReqSet];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GroupReqSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReqSets] DROP CONSTRAINT [FK_GroupReqSet];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ReqSetMACRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MACRequests] DROP CONSTRAINT [FK_ReqSetMACRequest];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -27,6 +45,21 @@ IF OBJECT_ID(N'[dbo].[Groups]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Projects]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Projects];
+GO
+IF OBJECT_ID(N'[dbo].[ProjectReleases]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProjectReleases];
+GO
+IF OBJECT_ID(N'[dbo].[ReqSets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ReqSets];
+GO
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
+GO
+IF OBJECT_ID(N'[dbo].[Envs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Envs];
+GO
+IF OBJECT_ID(N'[dbo].[MACRequests]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MACRequests];
 GO
 
 -- --------------------------------------------------
@@ -39,7 +72,9 @@ CREATE TABLE [dbo].[Groups] (
     [GroupName] nvarchar(max)  NOT NULL,
     [DateCreated] datetime  NOT NULL,
     [Owner] nvarchar(max)  NOT NULL,
-    [BackUpOwner] nvarchar(max)  NOT NULL
+    [BackUpOwner] nvarchar(max)  NOT NULL,
+    [DeptID] int  NOT NULL,
+    [Dept_DeptID] int  NOT NULL
 );
 GO
 
@@ -111,6 +146,13 @@ CREATE TABLE [dbo].[MACRequests] (
 );
 GO
 
+-- Creating table 'Depts'
+CREATE TABLE [dbo].[Depts] (
+    [DeptID] int IDENTITY(1,1) NOT NULL,
+    [DeptName] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -155,6 +197,12 @@ GO
 ALTER TABLE [dbo].[MACRequests]
 ADD CONSTRAINT [PK_MACRequests]
     PRIMARY KEY CLUSTERED ([MACID] ASC);
+GO
+
+-- Creating primary key on [DeptID] in table 'Depts'
+ALTER TABLE [dbo].[Depts]
+ADD CONSTRAINT [PK_Depts]
+    PRIMARY KEY CLUSTERED ([DeptID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -249,6 +297,21 @@ GO
 CREATE INDEX [IX_FK_ReqSetMACRequest]
 ON [dbo].[MACRequests]
     ([ReqSet_ReqSetID]);
+GO
+
+-- Creating foreign key on [Dept_DeptID] in table 'Groups'
+ALTER TABLE [dbo].[Groups]
+ADD CONSTRAINT [FK_DeptGroup]
+    FOREIGN KEY ([Dept_DeptID])
+    REFERENCES [dbo].[Depts]
+        ([DeptID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DeptGroup'
+CREATE INDEX [IX_FK_DeptGroup]
+ON [dbo].[Groups]
+    ([Dept_DeptID]);
 GO
 
 -- --------------------------------------------------

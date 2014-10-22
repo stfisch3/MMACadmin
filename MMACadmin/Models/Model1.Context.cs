@@ -32,5 +32,6 @@ namespace MMACadmin.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Env> Envs { get; set; }
         public virtual DbSet<MACRequest> MACRequests { get; set; }
+        public virtual DbSet<Dept> Depts { get; set; }
     }
 }

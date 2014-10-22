@@ -119,12 +119,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeptsController.cs" />
     <Compile Include="Controllers\EnvsController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MACRequestsController.cs" />
+    <Compile Include="Controllers\ProjectReleasesController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ReqSetsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dept.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Env.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -230,6 +238,30 @@
     <Content Include="Views\ReqSets\Edit.cshtml" />
     <Content Include="Views\ReqSets\Index.cshtml" />
     <Content Include="Views\ReqSets\CreateProject.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\MACRequests\Create.cshtml" />
+    <Content Include="Views\MACRequests\Delete.cshtml" />
+    <Content Include="Views\MACRequests\Details.cshtml" />
+    <Content Include="Views\MACRequests\Edit.cshtml" />
+    <Content Include="Views\MACRequests\Index.cshtml" />
+    <Content Include="Views\ProjectReleases\Create.cshtml" />
+    <Content Include="Views\ProjectReleases\Delete.cshtml" />
+    <Content Include="Views\ProjectReleases\Details.cshtml" />
+    <Content Include="Views\ProjectReleases\Edit.cshtml" />
+    <Content Include="Views\ProjectReleases\Index.cshtml" />
+    <Content Include="Views\Depts\Create.cshtml" />
+    <Content Include="Views\Depts\Delete.cshtml" />
+    <Content Include="Views\Depts\Edit.cshtml" />
+    <Content Include="Views\Depts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
