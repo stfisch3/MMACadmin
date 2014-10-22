@@ -1,18 +1,18 @@
-﻿@model IEnumerable<MMACadmin.Models.Role>
+﻿@model IEnumerable<MMACadmin.Models.Env>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Roles</h2>
+<h2>Environments</h2>
 <p>
-    Here is the list of available user Roles.
+    Here is the list of available Environments.
     This screen is available to application admins only.
 </p>
 <table class="table">
     <tr>
         <th>
-            Role Name
+            Environments
         </th>
         <th></th>
     </tr>
@@ -20,11 +20,11 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.RoleName)
+            @Html.DisplayFor(modelItem => item.EnvName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RoleID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RoleID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.EnvID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EnvID })
         </td>
     </tr>
 }

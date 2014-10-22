@@ -10,92 +10,92 @@ using MMACadmin.Models;
 
 namespace MMACadmin.Controllers
 {
-    public class RolesController : Controller
+    public class EnvsController : Controller
     {
         private Model1Container db = new Model1Container();
 
-        // GET: Roles
+        // GET: Envs
         public ActionResult Index()
         {
-            return View(db.Roles.ToList());
+            return View(db.Envs.ToList());
         }
 
-        // GET: Roles/Create
+        // GET: Envs/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Envs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoleName")] Role role)
+        public ActionResult Create([Bind(Include = "EnvName")] Env env)
         {
             if (ModelState.IsValid)
             {
-                db.Roles.Add(role);
+                db.Envs.Add(env);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(role);
+            return View(env);
         }
 
-        // GET: Roles/Edit/5
+        // GET: Envs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
-            if (role == null)
+            Env env = db.Envs.Find(id);
+            if (env == null)
             {
                 return HttpNotFound();
             }
-            return View(role);
+            return View(env);
         }
 
-        // POST: Roles/Edit/5
+        // POST: Envs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RoleID,RoleName")] Role role)
+        public ActionResult Edit([Bind(Include = "EnvID,EnvName")] Env env)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(role).State = EntityState.Modified;
+                db.Entry(env).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(role);
+            return View(env);
         }
 
-        // GET: Roles/Delete/5
+        // GET: Envs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
-            if (role == null)
+            Env env = db.Envs.Find(id);
+            if (env == null)
             {
                 return HttpNotFound();
             }
-            return View(role);
+            return View(env);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Envs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Role role = db.Roles.Find(id);
-            db.Roles.Remove(role);
+            Env env = db.Envs.Find(id);
+            db.Envs.Remove(env);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,15 +1,14 @@
-﻿@model MMACadmin.Models.Role
+﻿@model MMACadmin.Models.Env
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Role</h2>
+<h2>Delete Environment</h2>
 
-<h4>Are you sure you want to delete the role,  "@Html.DisplayFor(model => Model.RoleName)"?</h4>
+<h4>Are you sure you want to delete environment "@Html.DisplayFor(Model => Model.EnvName)"?</h4>
 <br />
 <div>
-
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
