@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MMACadmin.Models.ReqSet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Req. Sets</h2>
+<p>
+    A Req. Set is composed of all the necessary MAC requests for a specific group or project release.
+</p>
+<hr />
+<p>
+    @Html.ActionLink("Create New Group Req. Set", "CreateGroup") | |
+    @Html.ActionLink("Create New Project Req. Set", "CreateProject")
+</p>
+<table class="table">
+    <tr>
+        <th> Project </th>
+        <th> Release </th>
+        <th> Group </th>
+        <th> Role </th>
+        <th> Env. </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnvID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReqSetID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReqSetID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReqSetID })
+        </td>
+    </tr>
+}
+
+</table>
