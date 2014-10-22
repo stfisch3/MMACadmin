@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37279456e8f244638edc4fada03da0dc" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model1.Group" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Project" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.ProjectRelease" Width="1.5" PointX="1.125" PointY="2.5" />
+        <AssociationConnector Association="Model1.ProjectProjectRelease" />
+        <EntityTypeShape EntityType="Model1.ReqSet" Width="1.5" PointX="3.875" PointY="3.125" />
+        <EntityTypeShape EntityType="Model1.Role" Width="1.5" PointX="6.25" PointY="3.125" />
+        <EntityTypeShape EntityType="Model1.Env" Width="1.5" PointX="6.75" PointY="4.875" />
+        <AssociationConnector Association="Model1.RoleReqSet" />
+        <AssociationConnector Association="Model1.EnvReqSet" />
+        <AssociationConnector Association="Model1.ProjectReleaseReqSet" />
+        <AssociationConnector Association="Model1.GroupReqSet" />
+        <EntityTypeShape EntityType="Model1.MACRequest" Width="1.5" PointX="1.5" PointY="5.75" />
+        <AssociationConnector Association="Model1.ReqSetMACRequest" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

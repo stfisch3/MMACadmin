@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MMACadmin.Models.Role>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+<p>
+    Here is the list of available user Roles.
+    This screen is available to application admins only.
+</p>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            Role Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RoleID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RoleID })
+        </td>
+    </tr>
+}
+</table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

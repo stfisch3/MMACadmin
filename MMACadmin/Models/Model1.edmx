@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Groups" EntityType="Model1.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="Model1.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectReleases" EntityType="Model1.Store.ProjectReleases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReqSets" EntityType="Model1.Store.ReqSets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="Model1.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Envs" EntityType="Model1.Store.Envs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MACRequests" EntityType="Model1.Store.MACRequests" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProjectProjectRelease" Association="Model1.Store.ProjectProjectRelease">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectRelease" EntitySet="ProjectReleases" />
+    </AssociationSet>
+    <AssociationSet Name="RoleReqSet" Association="Model1.Store.RoleReqSet">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="ReqSet" EntitySet="ReqSets" />
+    </AssociationSet>
+    <AssociationSet Name="EnvReqSet" Association="Model1.Store.EnvReqSet">
+      <End Role="Env" EntitySet="Envs" />
+      <End Role="ReqSet" EntitySet="ReqSets" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectReleaseReqSet" Association="Model1.Store.ProjectReleaseReqSet">
+      <End Role="ProjectRelease" EntitySet="ProjectReleases" />
+      <End Role="ReqSet" EntitySet="ReqSets" />
+    </AssociationSet>
+    <AssociationSet Name="GroupReqSet" Association="Model1.Store.GroupReqSet">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="ReqSet" EntitySet="ReqSets" />
+    </AssociationSet>
+    <AssociationSet Name="ReqSetMACRequest" Association="Model1.Store.ReqSetMACRequest">
+      <End Role="ReqSet" EntitySet="ReqSets" />
+      <End Role="MACRequest" EntitySet="MACRequests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BackUpOwner" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+    </Key>
+    <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BackUpOwner" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectReleases">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+    </Key>
+    <Property Name="ReleaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReleaseName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BackUpOwner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProjectID" Type="int" Nullable="false" />
+    <Property Name="Project_ProjectID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReqSets">
+    <Key>
+      <PropertyRef Name="ReqSetID" />
+    </Key>
+    <Property Name="ReqSetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectID" Type="datetime" Nullable="true" />
+    <Property Name="ReleaseID" Type="int" Nullable="true" />
+    <Property Name="GroupID" Type="int" Nullable="true" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="RoleID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EnvID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role_RoleID" Type="int" Nullable="false" />
+    <Property Name="Env_EnvID" Type="int" Nullable="false" />
+    <Property Name="ProjectRelease_ReleaseID" Type="int" Nullable="true" />
+    <Property Name="Group_GroupID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Envs">
+    <Key>
+      <PropertyRef Name="EnvID" />
+    </Key>
+    <Property Name="EnvID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EnvName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MACRequests">
+    <Key>
+      <PropertyRef Name="MACID" />
+    </Key>
+    <Property Name="MACID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccSystem" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccEnv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccGroup" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AccServer" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AccDB" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AccJust" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isElevated" Type="bit" Nullable="false" />
+    <Property Name="ReqSetID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReqSet_ReqSetID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ProjectProjectRelease">
+    <End Role="Project" Type="Model1.Store.Projects" Multiplicity="1" />
+    <End Role="ProjectRelease" Type="Model1.Store.ProjectReleases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectID" />
+      </Principal>
+      <Dependent Role="ProjectRelease">
+        <PropertyRef Name="Project_ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleReqSet">
+    <End Role="Role" Type="Model1.Store.Roles" Multiplicity="1" />
+    <End Role="ReqSet" Type="Model1.Store.ReqSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="ReqSet">
+        <PropertyRef Name="Role_RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EnvReqSet">
+    <End Role="Env" Type="Model1.Store.Envs" Multiplicity="1" />
+    <End Role="ReqSet" Type="Model1.Store.ReqSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Env">
+        <PropertyRef Name="EnvID" />
+      </Principal>
+      <Dependent Role="ReqSet">
+        <PropertyRef Name="Env_EnvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectReleaseReqSet">
+    <End Role="ProjectRelease" Type="Model1.Store.ProjectReleases" Multiplicity="0..1" />
+    <End Role="ReqSet" Type="Model1.Store.ReqSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectRelease">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReqSet">
+        <PropertyRef Name="ProjectRelease_ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GroupReqSet">
+    <End Role="Group" Type="Model1.Store.Groups" Multiplicity="0..1" />
+    <End Role="ReqSet" Type="Model1.Store.ReqSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="ReqSet">
+        <PropertyRef Name="Group_GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReqSetMACRequest">
+    <End Role="ReqSet" Type="Model1.Store.ReqSets" Multiplicity="1" />
+    <End Role="MACRequest" Type="Model1.Store.MACRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReqSet">
+        <PropertyRef Name="ReqSetID" />
+      </Principal>
+      <Dependent Role="MACRequest">
+        <PropertyRef Name="ReqSet_ReqSetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="Model1.Group" />
+          <EntitySet Name="Projects" EntityType="Model1.Project" />
+          <EntitySet Name="ProjectReleases" EntityType="Model1.ProjectRelease" />
+          <AssociationSet Name="ProjectProjectRelease" Association="Model1.ProjectProjectRelease">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectRelease" EntitySet="ProjectReleases" />
+          </AssociationSet>
+          <EntitySet Name="ReqSets" EntityType="Model1.ReqSet" />
+          <EntitySet Name="Roles" EntityType="Model1.Role" />
+          <EntitySet Name="Envs" EntityType="Model1.Env" />
+          <AssociationSet Name="RoleReqSet" Association="Model1.RoleReqSet">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="ReqSet" EntitySet="ReqSets" />
+          </AssociationSet>
+          <AssociationSet Name="EnvReqSet" Association="Model1.EnvReqSet">
+            <End Role="Env" EntitySet="Envs" />
+            <End Role="ReqSet" EntitySet="ReqSets" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectReleaseReqSet" Association="Model1.ProjectReleaseReqSet">
+            <End Role="ProjectRelease" EntitySet="ProjectReleases" />
+            <End Role="ReqSet" EntitySet="ReqSets" />
+          </AssociationSet>
+          <AssociationSet Name="GroupReqSet" Association="Model1.GroupReqSet">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="ReqSet" EntitySet="ReqSets" />
+          </AssociationSet>
+          <EntitySet Name="MACRequests" EntityType="Model1.MACRequest" />
+          <AssociationSet Name="ReqSetMACRequest" Association="Model1.ReqSetMACRequest">
+            <End Role="ReqSet" EntitySet="ReqSets" />
+            <End Role="MACRequest" EntitySet="MACRequests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Owner" Type="String" Nullable="false" />
+          <Property Name="BackUpOwner" Type="String" Nullable="false" />
+          <NavigationProperty Name="ReqSets" Relationship="Model1.GroupReqSet" FromRole="Group" ToRole="ReqSet" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="Owner" Type="String" Nullable="false" />
+          <Property Name="BackUpOwner" Type="String" Nullable="false" />
+          <NavigationProperty Name="ProjectReleases" Relationship="Model1.ProjectProjectRelease" FromRole="Project" ToRole="ProjectRelease" />
+        </EntityType>
+        <EntityType Name="ProjectRelease">
+          <Key>
+            <PropertyRef Name="ReleaseID" />
+          </Key>
+          <Property Name="ReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReleaseName" Type="String" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="Owner" Type="String" Nullable="false" />
+          <Property Name="BackUpOwner" Type="String" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Model1.ProjectProjectRelease" FromRole="ProjectRelease" ToRole="Project" />
+          <NavigationProperty Name="ReqSets" Relationship="Model1.ProjectReleaseReqSet" FromRole="ProjectRelease" ToRole="ReqSet" />
+        </EntityType>
+        <Association Name="ProjectProjectRelease">
+          <End Type="Model1.Project" Role="Project" Multiplicity="1" />
+          <End Type="Model1.ProjectRelease" Role="ProjectRelease" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ReqSet">
+          <Key>
+            <PropertyRef Name="ReqSetID" />
+          </Key>
+          <Property Name="ReqSetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="DateTime" Nullable="true" />
+          <Property Name="ReleaseID" Type="Int32" Nullable="true" />
+          <Property Name="GroupID" Type="Int32" Nullable="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" />
+          <Property Name="RoleID" Type="String" Nullable="false" />
+          <Property Name="EnvID" Type="String" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Model1.RoleReqSet" FromRole="ReqSet" ToRole="Role" />
+          <NavigationProperty Name="Env" Relationship="Model1.EnvReqSet" FromRole="ReqSet" ToRole="Env" />
+          <NavigationProperty Name="ProjectRelease" Relationship="Model1.ProjectReleaseReqSet" FromRole="ReqSet" ToRole="ProjectRelease" />
+          <NavigationProperty Name="Group" Relationship="Model1.GroupReqSet" FromRole="ReqSet" ToRole="Group" />
+          <NavigationProperty Name="MACRequests" Relationship="Model1.ReqSetMACRequest" FromRole="ReqSet" ToRole="MACRequest" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          <NavigationProperty Name="ReqSets" Relationship="Model1.RoleReqSet" FromRole="Role" ToRole="ReqSet" />
+        </EntityType>
+        <EntityType Name="Env">
+          <Key>
+            <PropertyRef Name="EnvID" />
+          </Key>
+          <Property Name="EnvID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EnvName" Type="String" Nullable="false" />
+          <NavigationProperty Name="ReqSets" Relationship="Model1.EnvReqSet" FromRole="Env" ToRole="ReqSet" />
+        </EntityType>
+        <Association Name="RoleReqSet">
+          <End Type="Model1.Role" Role="Role" Multiplicity="1" />
+          <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="*" />
+        </Association>
+        <Association Name="EnvReqSet">
+          <End Type="Model1.Env" Role="Env" Multiplicity="1" />
+          <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectReleaseReqSet">
+          <End Type="Model1.ProjectRelease" Role="ProjectRelease" Multiplicity="0..1" />
+          <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="*" />
+        </Association>
+        <Association Name="GroupReqSet">
+          <End Type="Model1.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MACRequest">
+          <Key>
+            <PropertyRef Name="MACID" />
+          </Key>
+          <Property Name="MACID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccSystem" Type="String" Nullable="false" />
+          <Property Name="AccEnv" Type="String" Nullable="false" />
+          <Property Name="AccGroup" Type="String" Nullable="true" />
+          <Property Name="AccServer" Type="String" Nullable="true" />
+          <Property Name="AccDB" Type="String" Nullable="true" />
+          <Property Name="AccJust" Type="String" Nullable="true" />
+          <Property Name="isElevated" Type="Boolean" Nullable="false" />
+          <Property Name="ReqSetID" Type="String" Nullable="false" />
+          <NavigationProperty Name="ReqSet" Relationship="Model1.ReqSetMACRequest" FromRole="MACRequest" ToRole="ReqSet" />
+        </EntityType>
+        <Association Name="ReqSetMACRequest">
+          <End Type="Model1.ReqSet" Role="ReqSet" Multiplicity="1" />
+          <End Type="Model1.MACRequest" Role="MACRequest" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="BackUpOwner" ColumnName="BackUpOwner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="BackUpOwner" ColumnName="BackUpOwner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectReleases">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ProjectRelease)">
+        <MappingFragment StoreEntitySet="ProjectReleases">
+          <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+          <ScalarProperty Name="ReleaseName" ColumnName="ReleaseName" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="BackUpOwner" ColumnName="BackUpOwner" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReqSets">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ReqSet)">
+        <MappingFragment StoreEntitySet="ReqSets">
+          <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="EnvID" ColumnName="EnvID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Envs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Env)">
+        <MappingFragment StoreEntitySet="Envs">
+          <ScalarProperty Name="EnvID" ColumnName="EnvID" />
+          <ScalarProperty Name="EnvName" ColumnName="EnvName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MACRequests">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.MACRequest)">
+        <MappingFragment StoreEntitySet="MACRequests">
+          <ScalarProperty Name="MACID" ColumnName="MACID" />
+          <ScalarProperty Name="AccSystem" ColumnName="AccSystem" />
+          <ScalarProperty Name="AccEnv" ColumnName="AccEnv" />
+          <ScalarProperty Name="AccGroup" ColumnName="AccGroup" />
+          <ScalarProperty Name="AccServer" ColumnName="AccServer" />
+          <ScalarProperty Name="AccDB" ColumnName="AccDB" />
+          <ScalarProperty Name="AccJust" ColumnName="AccJust" />
+          <ScalarProperty Name="isElevated" ColumnName="isElevated" />
+          <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectProjectRelease" TypeName="Model1.ProjectProjectRelease" StoreEntitySet="ProjectReleases">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ProjectID" ColumnName="Project_ProjectID" />
+      </EndProperty>
+      <EndProperty Name="ProjectRelease">
+        <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoleReqSet" TypeName="Model1.RoleReqSet" StoreEntitySet="ReqSets">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleID" ColumnName="Role_RoleID" />
+      </EndProperty>
+      <EndProperty Name="ReqSet">
+        <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EnvReqSet" TypeName="Model1.EnvReqSet" StoreEntitySet="ReqSets">
+      <EndProperty Name="Env">
+        <ScalarProperty Name="EnvID" ColumnName="Env_EnvID" />
+      </EndProperty>
+      <EndProperty Name="ReqSet">
+        <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectReleaseReqSet" TypeName="Model1.ProjectReleaseReqSet" StoreEntitySet="ReqSets">
+      <EndProperty Name="ProjectRelease">
+        <ScalarProperty Name="ReleaseID" ColumnName="ProjectRelease_ReleaseID" />
+      </EndProperty>
+      <EndProperty Name="ReqSet">
+        <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+      </EndProperty>
+      <Condition ColumnName="ProjectRelease_ReleaseID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupReqSet" TypeName="Model1.GroupReqSet" StoreEntitySet="ReqSets">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="GroupID" ColumnName="Group_GroupID" />
+      </EndProperty>
+      <EndProperty Name="ReqSet">
+        <ScalarProperty Name="ReqSetID" ColumnName="ReqSetID" />
+      </EndProperty>
+      <Condition ColumnName="Group_GroupID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ReqSetMACRequest" TypeName="Model1.ReqSetMACRequest" StoreEntitySet="MACRequests">
+      <EndProperty Name="ReqSet">
+        <ScalarProperty Name="ReqSetID" ColumnName="ReqSet_ReqSetID" />
+      </EndProperty>
+      <EndProperty Name="MACRequest">
+        <ScalarProperty Name="MACID" ColumnName="MACID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
